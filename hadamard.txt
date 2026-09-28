@@ -1,16 +1,16 @@
-hilos 1 n 1000000 2.4 ms suma 36000000
-hilos 2 n 1000000 1.7 ms suma 36000000
-hilos 4 n 1000000 1.3 ms suma 36000000
-hilos 8 n 1000000 1.3 ms suma 36000000
-hilos 1 n 100000000 213.7 ms suma 3600000000
-hilos 2 n 100000000 137.1 ms suma 3600000000
-hilos 4 n 100000000 140.4 ms suma 3600000000
-hilos 8 n 100000000 126.1 ms suma 3600000000
-tbb hilos 12 grano 1 n 1000000 0.0 ms suma 0
-tbb hilos 1 grano 1 n 100000000 0.0 ms suma 0
-tbb hilos 2 grano 1 n 100000000 0.0 ms suma 0
-tbb hilos 4 grano 1 n 100000000 0.0 ms suma 0
-tbb hilos 12 grano 1 n 100000000 0.0 ms suma 0
-tbb hilos 12 grano 1000 n 100000000 0.0 ms suma 0
-tbb hilos 12 grano 100000 n 100000000 0.0 ms suma 0
-tbb hilos 12 grano 10000000 n 100000000 0.0 ms suma 0
+hilos 1 n 1000000 1.8 ms suma 36000000
+hilos 2 n 1000000 0.9 ms suma 36000000
+hilos 4 n 1000000 0.8 ms suma 36000000
+hilos 8 n 1000000 1.0 ms suma 36000000
+hilos 1 n 100000000 103.5 ms suma 3600000000
+hilos 2 n 100000000 82.3 ms suma 3600000000
+hilos 4 n 100000000 76.0 ms suma 3600000000
+hilos 8 n 100000000 71.4 ms suma 3600000000
+tbb hilos 12 grano 1 n 1000000 0.5 ms suma 36000000
+tbb hilos 1 grano 1 n 100000000 110.5 ms suma 3600000000
+tbb hilos 2 grano 1 n 100000000 79.9 ms suma 3600000000
+tbb hilos 4 grano 1 n 100000000 72.2 ms suma 3600000000
+tbb hilos 12 grano 1 n 100000000 62.4 ms suma 3600000000
+tbb hilos 12 grano 1000 n 100000000 62.5 ms suma 3600000000
+tbb hilos 12 grano 100000 n 100000000 64.7 ms suma 3600000000
+tbb hilos 12 grano 10000000 n 100000000 71.7 ms suma 3600000000

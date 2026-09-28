@@ -1,0 +1,6 @@
+creciente bloques 634.0 ms total 1651577046
+creciente turnos 337.7 ms total 1651577046
+creciente demanda 327.5 ms total 1651577046
+periodico bloques 337.9 ms total 1702399936
+periodico turnos 729.9 ms total 1702399936
+periodico demanda 316.9 ms total 1702399936
