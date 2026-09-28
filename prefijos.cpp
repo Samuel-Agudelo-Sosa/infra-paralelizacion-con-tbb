@@ -37,6 +37,38 @@ void secuencial(const vector<long> &v, vector<long> &r) {
 // de los bloques anteriores es su punto de partida. Segunda: cada hilo rehace
 // su bloque arrancando desde ese punto y escribe r.
 void en_dos_pasadas(const vector<long> &v, vector<long> &r) {
+  size_t paso = v.size() / BLOQUES;
+  vector<long> totales(BLOQUES, 0);
+  vector<thread> hilos;
+  for (int h = 0; h < BLOQUES; h++) 
+    hilos.emplace_back([&, h]{
+      long mejor = LONG_MIN;
+      size_t ini = h * paso;
+      size_t fin = (h == BLOQUES - 1) ? v.size() : ini + paso;
+      for(size_t i = ini; i < fin; i++) {
+        mejor = max(mejor, saldo(v[i]));
+      }
+      totales[h] = mejor;
+    }
+
+      );
+
+  for (auto &h : hilos) h.join();
+  vector<long> desplazamientos(BLOQUES, LONG_MIN);
+  for(int h = 1; h < BLOQUES; h++)desplazamientos[h] = max(desplazamientos[h-1], totales[h-1]);
+  hilos.clear();
+  for (int h = 0; h < BLOQUES; h++) 
+    hilos.emplace_back([&, h]{
+      long mejor = desplazamientos[h];
+      size_t paso = v.size() / BLOQUES;
+      size_t ini = h * paso;
+      size_t fin = (h == BLOQUES - 1) ? v.size() : ini + paso;
+      for(int i = ini; i < fin; i++){
+        mejor = max(mejor, saldo(v[i]));
+        r[i] = mejor;
+      }
+    });
+  for (auto &h : hilos) h.join();
 }
 
 // Llenado determinista: una serie que sube con ruido, la misma en todas las
