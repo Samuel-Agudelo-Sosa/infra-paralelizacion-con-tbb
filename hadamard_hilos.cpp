@@ -18,11 +18,19 @@ const int B = 9;  // valor constante de v
 // TODO: cada hilo calcula w[i] = u[i] * v[i] sobre su trozo [ini, fin).
 void producto(const vector<int> &u, const vector<int> &v, vector<int> &w,
               size_t ini, size_t fin) {
+                for(size_t i = ini; i < fin; i++){
+                    w[i] = u[i] * v[i];
+                }
 }
 
 // TODO: cada hilo suma su trozo de w y deja el parcial en `salida`. Acumular
 // en una variable local y escribir `salida` una sola vez al final.
 void sumar(const vector<int> &w, size_t ini, size_t fin, long &salida) {
+      long long acumulador = 0;
+      for(size_t i = ini; i < fin; i++){
+                    acumulador += w[i];
+                }
+    salida = acumulador;
 }
 
 // TODO: reparte [0, n) en k trozos, lanza los hilos del producto y los une;
@@ -30,7 +38,26 @@ void sumar(const vector<int> &w, size_t ini, size_t fin, long &salida) {
 // trozo se queda con el resto cuando n no es múltiplo de k.
 long hadamard(const vector<int> &u, const vector<int> &v, vector<int> &w,
               int k) {
-  return 0;
+                long salida = 0;
+                vector<long> parciales(k, 0);
+                size_t paso = v.size() / k;
+                vector<thread>hilos;
+                for(size_t i = 0; i < k; i++){
+                  size_t ini = i * paso;
+                  size_t fin = (i == k - 1 ) ? v.size() : ini + paso;
+                  hilos.emplace_back(producto, cref(u), cref(v), ref(w), ini, fin);
+                }
+                for(auto &h : hilos) h.join();
+                vector<thread>hilos_suma;
+                for(size_t i = 0; i < k; i++){
+                  size_t ini = i * paso;
+                  size_t fin = (i == k - 1) ? v.size() : ini + paso;
+                  hilos_suma.emplace_back(sumar, cref(w), ini, fin, ref(parciales[i]));
+                }
+                for(auto &h : hilos_suma) h.join();
+                for(long p: parciales) salida += p;
+                return salida;
+
 }
 
 int main(int argc, char **argv) {
